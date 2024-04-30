@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
-use Illuminate\Database\QueryException;
-use PDOException; 
+use PDOException;
 use Exception;
+use Illuminate\Http\Request;
+use App\Exports\PelangganExport;
+use App\Imports\PelangganImport;
+use Illuminate\Database\QueryException;
+use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StorePelangganRequest;
 use App\Http\Requests\UpdatePelangganRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PelangganController extends Controller
 {
@@ -25,6 +31,33 @@ class PelangganController extends Controller
             catch (QueryException | Exception | PDOException $error) {
             $this->failResponse($error->getMessage(), $error->getCode());
         }
+    }
+
+
+    /**
+     * Export data to Excel.
+     */
+    public function exportData()
+    {
+        $date = date('Y-m-d');
+        return Excel::download(new PelangganExport, $date.'pelanggan.xlsx');
+    }
+
+    public function importData(Request $request){
+
+        Excel::import(new PelangganImport, $request->import);
+        return redirect('pelanggan')->with('success', 'Import data berhasil!');
+    }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Pelanggan::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('pelanggan/pelanggan-pdf', ['pelanggan'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-pelangan.pdf');
     }
 
     /**

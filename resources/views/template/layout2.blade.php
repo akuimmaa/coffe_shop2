@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>P R O J E C T</title>
+    <title>I M A R T</title>
 
     <!-- Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -70,8 +70,9 @@
                                 <li><a><i class="fa fa-user"></i> KASIR <span class="fa fa-chevron-down"></span></a>
                                 {{-- <li><a href="{{ url('/pelanggan') }}"><i class="fa fa-user"></i> Pelanggan</a> --}}
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ url('/informasi') }}">Tentang Aplikasi</a></li>
-                                        <li><a href="{{ url('/aplikasi') }}">Produk Titipan</a></li>
+                                       <!-- <li><a href="{{ url('/informasi') }}">Tentang Aplikasi</a></li>
+                                        <li><a href="{{ url('/aplikasi') }}">Produk Titipan</a></li> -->
+                                        
                                         <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li>
                                         <li><a href="{{ url('/pemesanan') }}">Pemesanan</a></li>
                                     </ul>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>P R O J E C T</title>
+    <title>I M A R T</title>
 
     <!-- Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -73,10 +73,16 @@
                                          <li><a href="{{ url('/jenis') }}">Jenis</a></li>
                                          <li><a href="{{ url('/menu') }}">Menu</a></li>
                                          <li><a href="{{ url('/stok') }}">Stok</a></li>
-                                         <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li>
-                                         <li><a href="{{ url('/pemesanan') }}">Pemesanan</a></li>
-                                        {{-- <li><a href="{{ url('/category') }}">Category</a></li>
-                                        <li><a href="{{ url('/produk') }}">Produk</a></li> --}}
+                                         <li><a href="{{ url('grafik') }}">Grafik</a></li>
+
+
+                                        <!-- <li><a href="{{ url('/absensi') }}">Absensi Kerja</a></li>
+                                         <li><a href="{{ url('/meja') }}">Meja</a></li>
+                                         <li><a href="{{ url('/category') }}">Category</a></li>
+                                         <li><a href="{{ url('/contact') }}">Contat Us</a></li> --
+                                        -->
+
+                                        {{--<li><a href="{{ url('/produk') }}">Produk</a></li> --}}
                                     </ul>
                                 </li>
                             </ul>

@@ -40,10 +40,14 @@
                                     </button>
 
                                     <a href="{{ route('export-jenis') }}" class="btn btn-success">
-                                        <i class="fa fa-file-excel"></i> Export
+                                        <i class="fa fa-file-excel"></i> Export Excel 
                                     </a>
 
-                                    <button href="{{ route('import-excel') }}" type="button" class="btn btn-warning btn-import"
+                                    <a href="{{ route('jenis-export-pdf') }}" class="btn btn-danger">
+                                        <i class="fa fa-file-pdf"></i> Export PDF
+                                    </a>
+
+                                    <button href="{{ route('import-jenis') }}" type="button" class="btn btn-warning btn-import"
                                     data-toggle="modal" data-target="#FormImport">
                                     <i class="fas fa-file-import"></i> Import </button>
                     </tbody>
@@ -85,10 +89,11 @@
                 </div>
             </div>
             <br />
-            @include('jenis.import')
+            
         </div>
-        
+        @include('jenis.import')
         @include('jenis.form')
+        
     </section>
 
 @endsection

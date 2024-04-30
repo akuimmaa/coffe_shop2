@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use PDOException; 
 use Exception;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class StokController extends Controller
 {
@@ -45,6 +46,17 @@ class StokController extends Controller
     {
         Excel::import(new StokImport, $request->import);
         return redirect('stok')->with('success', 'Import data paket berhasil!');
+    }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Stok::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('stok/stok-pdf', ['stok'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-stok.pdf');
     }
                     
     /**

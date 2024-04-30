@@ -13,6 +13,8 @@ use App\Imports\AplikasiImport;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class AplikasiController extends Controller
 {
@@ -46,6 +48,18 @@ class AplikasiController extends Controller
         Excel::import(new AplikasiImport, $request->import);
         return redirect('aplikasi')->with('success', 'Import data paket berhasil!');
     }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Aplikasi::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('aplikasi/aplikasi-pdf', ['aplikasi'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-aplikasi.pdf');
+    }
+
 
     /**
      * Show the form for creating a new resource.

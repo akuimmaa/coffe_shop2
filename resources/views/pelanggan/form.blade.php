@@ -20,7 +20,7 @@
 
               <div id="method"></div>
               <div class="form-group row">
-                <label for="staticEmail" class="col-sm-4 col-form-label">no_telp</label>
+                <label for="staticEmail" class="col-sm-4 col-form-label">telphone</label>
                 <div class="col-sm-8">
                   <input type="text" class="form-control" id="no_telp" value="" name="no_telp">
                 </div>

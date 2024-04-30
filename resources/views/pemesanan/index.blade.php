@@ -395,7 +395,7 @@
                                         <ul class="ordered-list">
 
                                         </ul>
-                                        Total Bayar : <h2 id="total"> 0</h2>
+                                        Total Bayar : <h2 id="total">0</h2>
 
                                         <!-- <div class="form-group row">
                                             <label for="Pelanggan" class="col-sm-4 col-form-label">Pelanggan</label>

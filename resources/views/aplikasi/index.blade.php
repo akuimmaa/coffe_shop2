@@ -40,13 +40,16 @@
                                     </button>
 
                                     <a href="{{ route('export-aplikasi') }}" class="btn btn-success">
-                                        <i class="fa fa-file-excel"></i> Export
+                                        <i class="fa fa-file-excel"></i> Export Excel
                                     </a>
 
-                                    <button type="button" class="btn test btn-warning" data-toggle="modal"
-                                        data-target="#modalFormImport">
-                                        Import Excel
-                                    </button>
+                                    <a href="{{ route('aplikasi-export-pdf') }}" class="btn btn-danger">
+                                        <i class="fa fa-file-pdf"></i> Export PDF
+                                    </a>
+
+                                    <button href="{{ route('import-aplikasi') }}" type="button" class="btn btn-warning btn-import"
+                                    data-toggle="modal" data-target="#FormImport">
+                                    <i class="fas fa-file-import"></i> Import </button>
                                     
                                 </div>
                                 <div class="clearfix"></div>
@@ -87,10 +90,10 @@
                 </div>
             </div>
             <br />
-            @include('aplikasi.import')
         </div>
         
         @include('aplikasi.form')
+        @include('aplikasi.import')
     </section>
 
 @endsection

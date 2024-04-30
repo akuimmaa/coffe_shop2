@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Jenis;
 use App\Exports\JenisExport;
-use App\Imports\JenisImport; 
+use App\Imports\JenisImport;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\StoreJenisRequest;
 use App\Http\Requests\UpdateJenisRequest;
 use PDOException;
@@ -12,6 +13,7 @@ use Exception;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+
 
 
 class JenisController extends Controller
@@ -32,7 +34,7 @@ class JenisController extends Controller
     }
 
     /**
-     * Export data to Excel.
+     * Export import data to Excel and PDF.
      */
     public function exportData()
     {
@@ -40,10 +42,21 @@ class JenisController extends Controller
         return Excel::download(new JenisExport, $date.'jenis.xlsx');
     }
 
-    public function importData(Request $request){
-
+    public function importData(Request $request)
+    {
         Excel::import(new JenisImport, $request->import);
         return redirect('jenis')->with('success', 'Import data paket berhasil!');
+    }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Jenis::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('jenis/jenis-pdf', ['jenis'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-jenis.pdf');
     }
 
     /**

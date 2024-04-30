@@ -9,10 +9,12 @@ use App\Imports\MenuImport;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use PDOException; 
 use Exception;
 use Maatwebsite\Excel\Excel as ExcelExcel;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MenuController extends Controller
 {
@@ -40,11 +42,21 @@ class MenuController extends Controller
         return Excel::download(new MenuExport, $name);
     }
 
-    public function importData()
+    public function importData(Request $request)
     {
-        Excel::import(new MenuImport, request()->file('import'));
+        Excel::import(new MenuImport, $request->import);
+        return redirect('menu')->with('success', 'Import data paket berhasil!');
+     }
 
-        return redirect(request()->segment(1).'/menu')->with('success', 'import data Menu Berhasil!');
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Menu::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('menu/menu-pdf', ['menu'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-menu.pdf');
     }
 
 
@@ -113,8 +125,10 @@ class MenuController extends Controller
             
         }
 
-        $menu->update($data); 
-        return redirect('menu')->with('success', 'Update data berhasil');
+        $data['deskripsi'] = $request->deskripsi;
+
+        $menu->update($data);
+        return redirect('menu')->with('success', 'Update data menu berhasil');
     }
 
     /**

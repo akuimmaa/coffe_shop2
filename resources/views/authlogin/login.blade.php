@@ -31,6 +31,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form method="post" action="/login/cek">
+              @csrf
               <h1>Login Form</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" name="email" required="" />
@@ -38,7 +39,6 @@
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="password" required="" />
               </div>
-              @csrf
               <div>
                 <button type="submit" class="btn btn-default submit" >Log in</button>
                 <a class="reset_pass" href="#">Lost your password?</a>

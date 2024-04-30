@@ -1,6 +1,6 @@
 <footer>
                 <div class="pull-right">
-                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                    I M A R T - RISMA  Tahun 2024 <a href="https://colorlib.com"></a>
                 </div>
                 <div class="clearfix"></div>
             </footer>

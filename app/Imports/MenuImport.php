@@ -2,30 +2,24 @@
 namespace App\Imports;
 
 use App\Models\Menu;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MenuImport implements ToCollection, WithHeadingRow
+class MenuImport implements ToModel, WithHeadingRow
 {
-    public function collection(Collection $collection)
+    public function model(Array $rows)
     {
+             return new Menu([
+                    'id'         => $rows['id'],
+                    'nama_menu'  => $rows['nama_menu'],
+                    'harga'      => $rows['harga'],
+                    'image'      => $rows['image'],
+                    'deskripsi'  => $rows['deskripsi'],
+              ]); 
+     }
 
-        foreach ($collection as $row) {
-            $jenis_id = $row['jenis_id'];
-            $nama_menu = $row['nama_menu'];
-            $harga = $row['harga'];
-            $image = $row['image'];
-            $deskripsi = $row['deskripsi'];
-
-            Menu::create([
-                'jenis_id'  => $jenis_id,
-                'nama_menu' => $nama_menu,
-                'harga'     => $harga,
-                'image'     => $image,
-                'deskripsi' => $deskripsi
-            ]);
-        }
-    }
+     public function headingRow()
+     {
+        return 3;
+     }
 }

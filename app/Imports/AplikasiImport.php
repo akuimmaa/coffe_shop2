@@ -1,38 +1,28 @@
 <?php
-
 namespace App\Imports;
 
 use App\Models\Aplikasi;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AplikasiImport implements ToCollection, WithHeadingRow
+class AplikasiImport implements ToModel, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function collection(Collection $collection)
+    public function model(Array $rows)
     {
-        foreach ($collection as $row) {
-            $nama_produk = $row['nama_produk'];
-            $nama_suppllier = $row['nama_suppllier'];
-            $harga_beli = $row['harga_beli'];
-            $harga_jual = $row['harga_jual'];
-            $stok = $row['stok'];
-            $keterangan = $row['keterangan'];
+             return new Aplikasi([
+                'nama_produk'    => $rows['nama_produk'],
+                'nama_suppllier' => $rows['nama_suppllier'],
+                'harga_beli'     => $rows['harga_beli'],
+                'harga_jual'     => $rows['harga_jual'],
+                'stok'           => $rows['stok'],
+                'keterangan'     => $rows['keterangan'],
+              ]); 
+     }
 
-            aplikasi::create([
-                'nama_produk'      => $nama_produk,
-                'nama_suppllier'   => $nama_suppllier,
-                'harga_beli'       => $harga_beli,
-                'harga_jual'       => $harga_jual,
-                'stok'             => $stok,
-                'keterangan'       => $keterangan
-            ]);
-        }
-    }
+     public function headingRow()
+     {
+        return 3;
+     }
 }
+
+

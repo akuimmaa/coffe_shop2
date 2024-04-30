@@ -40,10 +40,15 @@
                                     </button>
 
                                     <a href="{{ route('export-menu') }}" class="btn btn-success">
-                                        <i class="fa fa-file-excel"></i> Export
+                                        <i class="fa fa-file-excel"></i> Export Excel
                                     </a>
 
-                                    <button href="{{ route('import-excel') }}" type="button" class="btn btn-warning btn-import"
+                                    <a href="{{ route('menu-export-pdf') }}" class="btn btn-danger">
+                                        <i class="fa fa-file-pdf"></i> Export PDF
+                                    </a>
+
+
+                                    <button href="{{ route('import-menu') }}" type="button" class="btn btn-warning btn-import"
                                     data-toggle="modal" data-target="#FormImport">
                                     <i class="fas fa-file-import"></i> Import </button>
                                     

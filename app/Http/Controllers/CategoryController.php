@@ -5,7 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use PDOException;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use PDOException; 
+use Exception;
+use App\Exports\CategoryExport;
+use App\Imports\CategoryImport; 
+use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CategoryController extends Controller
 {
@@ -21,6 +29,32 @@ class CategoryController extends Controller
             catch (QueryException | Exception | PDOException $error) {
                 $this->failResponse($error->getMessage(), $error->getCode());
             }
+    }
+
+         /**
+     * Export data to Excel.
+     */
+    public function exportData()
+    {
+        $date = date('Y-m-d');
+        return Excel::download(new CategoryExport, $date.'category.xlsx');
+    }
+
+    public function importData(Request $request)
+    {
+        Excel::import(new CategoryImport, $request->import);
+        return redirect('category')->with('success', 'Import data paket berhasil!');
+    }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = Category::all(); 
+          
+        // Render view ke HTML
+        $pdf = PDF::loadView('category/category-pdf', ['category'=>$data]); 
+        $date = date('Y-m-d');
+        return $pdf->download($date.'-data-category.pdf');
     }
 
     /**

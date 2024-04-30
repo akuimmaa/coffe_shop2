@@ -16,10 +16,12 @@
                 <label for="jenis_id" class="col-sm-4 col-form-label">Jenis ID</label>
                   <div class="col-sm-8">
                     <select name="jenis_id" id="jenis_id">
+
                       {{-- <option value="">Pilih Jenis ID</option> --}}
                       @foreach ($jenis as $c)
                       <option value="{{ $c->id }}">{{ $c->nama_jenis }}</option>
                       @endforeach
+                      
                     </select>
                   </div>
               </div>

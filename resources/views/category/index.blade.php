@@ -38,6 +38,18 @@
                                         data-target="#modalFormCategory">
                                         Tambah Category
                                     </button>
+
+                                    <a href="{{ route('export-category') }}" class="btn btn-success">
+                                        <i class="fa fa-file-excel"></i> Export Excel
+                                    </a>
+
+                                    <a href="{{ route('category-export-pdf') }}" class="btn btn-danger">
+                                        <i class="fa fa-file-pdf"></i> Export PDF
+                                    </a>
+
+                                    <button href="{{ route('import-category') }}" type="button" class="btn btn-warning btn-import"
+                                    data-toggle="modal" data-target="#FormImport">
+                                    <i class="fas fa-file-import"></i> Import </button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -76,6 +88,7 @@
                 </div>
             </div>
             <br />
+            @include('category.import')
         </div>
         @include('category.form')
     </section>

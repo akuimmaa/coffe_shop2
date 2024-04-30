@@ -5,9 +5,14 @@ namespace App\Exports;
 use App\Models\Jenis;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Sheet;
 
-class JenisExport implements FromCollection
+class JenisExport implements FromCollection, WithHeadings, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -15,15 +20,13 @@ class JenisExport implements FromCollection
     public function collection()
     {
         return Jenis::all();
-        return Jenis::where('nama_jenis', auth()->user()->nama_jenis)->get();
     }
 
     public function headings(): array
     {
         return [
-            'No.',
+            'ID.',
             'Nama_Jenis',
-            'Tools'
         ];
     }
 
@@ -31,17 +34,17 @@ class JenisExport implements FromCollection
     {
         return [
             AfterSheet::class   => function(AfterSheet $event) {
-                $event->sheet->getClumnDimension('A')->setAutoSize(true);
-                $event->sheet->getClumnDimension('B')->setAutoSize(true);
-                $event->sheet->getClumnDimension('C')->setAutoSize(true);
+                $event->sheet->getColumnDimension('A')->setAutoSize(true);
+                $event->sheet->getColumnDimension('B')->setAutoSize(true);
+                $event->sheet->getColumnDimension('C')->setAutoSize(true);
 
-                $event->sheet->insertNeaRowBefore(1, 2);
+                $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:C1');
                 $event->sheet->setCellValue('A1', 'DATA JENIS MENU');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true); 
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 
-                $event->sheet->getStyle('A3;C' .$event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:C' .$event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderstyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -53,12 +56,3 @@ class JenisExport implements FromCollection
         ];
     }
 }
-
-
-
-   //public function view(): View
-   // {
-    //    return view('jenis.data', [
-     //       'jenis' => Jenis::all()
-      //  ]);
-    //}
