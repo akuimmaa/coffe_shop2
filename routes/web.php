@@ -31,6 +31,7 @@ Route::group(['middleware'=>['cekUserLogin:1']], function(){
     Route::resource('/informasi', InfoController::class);
     Route::resource('/contact', HomeController::class);
     Route::get('grafik', [GrafikController::class, 'index']);
+    Route::get('data_penjualan/{lastCount}', [GrafikController::class, 'data_penjualan']);
 
 
 

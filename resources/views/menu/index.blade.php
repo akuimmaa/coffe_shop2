@@ -157,5 +157,6 @@
             modal.find('.modal-body form').attr('action','{{ url('menu') }}')
         }
     })
+    
     </script>
 @endpush

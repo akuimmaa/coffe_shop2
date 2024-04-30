@@ -16,21 +16,21 @@
                             <h3>Transaksi </h3>
                         </div>
                     </div>
-                    <div class="animated flipInY col-lg-5 col-md-3 col-sm-6 ">
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
                         <div class="tile-stats">
                             <div class="icon"><i class="fa fa-comments-o"></i></div>
                             <div class="count">RP. {{ $pendapatan }}</div>
                             <h3>Jumlah Pendapatan</h3>
                         </div>
                     </div>
-                    <div class="animated flipInY col-lg-5 col-md-3 col-sm-6 ">
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
                         <div class="tile-stats">
                             <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
                             <div class="count">Rp. 345.000</div>
                             <h3>Laba Rugi</h3>
                         </div>
                     </div>
-                    <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 ">
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
                         <div class="tile-stats">
                             <div class="icon"><i class="fa fa-users"></i></div>
                             <div class="count">{{ $count_pelanggan }}</div>
@@ -55,9 +55,9 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="col-12 mb-4">
+                            <div class="col-12 " style="margin-bottom: 10rem">
                                 <div class="demo-container" style="height:280px">
-                                    <div id="chart_plot_02" class="demo-placeholder"></div>
+                                    <div id="chart" class=""></div>
                                 </div>
                             </div>
 
@@ -165,6 +165,9 @@
         @endsection
 
         @push('script')
+
+<script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
+
             <script>
                 window.onload = function() {
                     var dataPenjualan = [];
